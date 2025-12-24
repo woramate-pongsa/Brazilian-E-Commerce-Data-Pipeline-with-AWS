@@ -1,0 +1,13 @@
+# Project name
+project_name = "YOUR-PROJECT-NAME"
+
+# Codespace IP
+my_ip = "YOUR/IP"
+
+# Database username & password
+db_username = "YOUR-DB-USERNAME"
+db_password = "YOUR-DB-PASSWORD"
+
+# Create redshift cluster
+# false if you don't want to turn on redshift
+create_redshift = true

@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: raw_data  # ตั้งชื่อ Source (ไว้อ้างอิงใน dbt)
+    database: main_db # ชื่อ Database ใน Redshift
+    schema: raw_data   # ชื่อ Schema ที่เรา COPY ข้อมูลลงไป
+    tables:
+      - name: customers
+      - name: geolocation
+      - name: leads_closed
+      - name: leads_qualified
+      - name: order_items
+      - name: order_payments
+      - name: order_reviews
+      - name: orders
+      - name: product_category_name_translation
+      - name: products
+      - name: sellers
