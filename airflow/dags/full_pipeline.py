@@ -27,8 +27,7 @@ DB_USERNAME = os.getenv("DB_USERNAME")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 DBT_ENV = {
-    "DBT_PROFILES_DIR": f"{PROJECT_PATH}/dbt", # ชี้ไปที่ที่มี profiles.yml (ถ้าคุณย้ายมาใส่ในโปรเจค)
-    # หรือถ้าใช้ env var ล้วนๆ
+    "DBT_PROFILES_DIR": f"{PROJECT_PATH}/dbt",
     "DBT_HOST": DBT_HOST,
     "DBT_USER": DBT_USER,
     "DBT_PASSWORD": DBT_PASSWORD,
