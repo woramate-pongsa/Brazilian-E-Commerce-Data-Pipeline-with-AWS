@@ -5,14 +5,8 @@ WITH rfm_metrics AS (
 rfm_scores AS (
     SELECT
         *,
-        -- แบ่งเกรด 1-5 (5 = ดีที่สุด, 1 = แย่ที่สุด)
-        -- Recency: ยิ่งน้อยยิ่งดี (เลยต้อง order by desc เพื่อให้วันน้อยๆ ได้เลขกลุ่มสูงๆ หรือสลับ logic ตามถนัด)
         NTILE(5) OVER (ORDER BY recency_days DESC) as r_score, 
-        
-        -- Frequency: ยิ่งมากยิ่งดี
         NTILE(5) OVER (ORDER BY frequency ASC) as f_score,
-        
-        -- Monetary: ยิ่งมากยิ่งดี
         NTILE(5) OVER (ORDER BY monetary ASC) as m_score
     FROM rfm_metrics
 ),
@@ -20,15 +14,12 @@ rfm_scores AS (
 final_segments AS (
     SELECT 
         *,
-        -- คำนวณ SM Score แบบสูตรของคุณ (Review * Monetary / 2)
-        -- (ระวัง: NTILE ใน Redshift บางทีคืนค่าเป็น INT)
         (COALESCE(avg_review_score, 0) * m_score) / 2.0 as sm_score
     FROM rfm_scores
 )
 
 SELECT
     *,
-    -- Logic การตัดเกรด (Business Logic)
     CASE
         WHEN sm_score >= 5 AND r_score BETWEEN 4 AND 5 THEN 'Champion'
         WHEN sm_score BETWEEN 4 AND 5 AND r_score BETWEEN 3 AND 5 THEN 'Loyal'

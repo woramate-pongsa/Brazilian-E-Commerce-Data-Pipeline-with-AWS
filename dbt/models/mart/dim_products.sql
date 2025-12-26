@@ -1,5 +1,4 @@
 WITH products AS (
-    -- ใช้ ref() เพื่ออ้างอิงถึง staging model ที่เราทำไว้ (ไม่ใช่ raw table)
     SELECT * FROM {{ ref('stg_products') }}
 ),
 
@@ -9,7 +8,6 @@ category_translation AS (
 
 SELECT
     p.product_id,
-    -- ใช้ COALESCE เพื่อจัดการค่า NULL หรือใช้ชื่อภาษาอังกฤษถ้ามี
     COALESCE(t.product_category_name_english, p.product_category_name, 'Unknown') AS category_name,
     p.product_name_lenght,
     p.product_description_lenght,

@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: raw_data  # ตั้งชื่อ Source (ไว้อ้างอิงใน dbt)
-    database: main_db # ชื่อ Database ใน Redshift
-    schema: raw_data   # ชื่อ Schema ที่เรา COPY ข้อมูลลงไป
+  - name: raw_data
+    database: main_db
+    schema: raw_data
     tables:
       - name: customers
       - name: geolocation
